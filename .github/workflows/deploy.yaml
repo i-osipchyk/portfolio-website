@@ -13,20 +13,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.x'
-
-    - name: Install Docker
-      run: sudo apt-get install docker.io
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
 
     - name: Log in to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build Docker image
       run: |
-        docker build -t ${{ secrets.ECR_REPOSITORY_URI }} .
+        docker buildx build --tag ${{ secrets.ECR_REPOSITORY_URI }} --push .
 
     - name: Tag Docker image
       run: |
