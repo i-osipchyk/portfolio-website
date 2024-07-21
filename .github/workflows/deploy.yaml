@@ -29,4 +29,4 @@ jobs:
 
     - name: Build and Push Docker image
       run: |
-        docker buildx build --tag ${{ secrets.ECR_REPOSITORY_URI }}:latest --push .
+        docker buildx build --platform linux/amd64,linux/arm64 --tag ${{ secrets.ECR_REPOSITORY_URI }}:latest --push .
