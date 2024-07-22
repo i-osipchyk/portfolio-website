@@ -4,29 +4,54 @@ on:
   push:
     branches:
       - main
-
+env:
+  ECR_IMAGE: ${{ vars.ECR_IMAGE }}
+  AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+  ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
+  ECS_SERVICE: ${{ vars.ECS_SERVICE }}
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+    - name: Set up QEMU for arm64
+      run: |
+        docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      if: runner.os == 'Linux'
+
+    - name: Set up Docker for arm64
+      uses: docker/setup-qemu-action@v2
+      with:
+        platforms: linux/arm64
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v3
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
+      run: |
+        aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
 
     - name: Build and Push Docker image
       run: |
-        docker buildx build --platform linux/amd64,linux/arm64 --tag ${{ secrets.ECR_REPOSITORY_URI }}:latest --push .
+        docker buildx create --use
+        docker buildx inspect --bootstrap
+        docker build --platform linux/arm64 -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_BACKEND_IMAGE:latest --push .
+
+    - name: Deploy to ECS
+      uses: imehedi/actions-awscli-v2@latest
+      with:
+        args: ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: "eu-north-1"
