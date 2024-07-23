@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}About Me{% endblock %}
+
+{% block content %}
+<h1>Welcome to My Data Science Portfolio!</h1>
+<div class="about">
+    <h2>About Me</h2>
+    <p>
+        Hi, I'm Ivan, a passionate Data Scientist with a strong background in Machine Learning, AI Engineering, and Data Analytics.
+        With a Bachelor's degree in Computer Science and a year of professional experience, I have developed a deep understanding of
+        data-driven methodologies and analytical techniques. I have experience with various types of data, including images, text, and sales data,
+        where I implement solutions that drive business growth and innovation.
+    </p>
+    <p>
+        I have worked in multinational teams on diverse tasks and traveled to many countries around the world. These experiences
+        help me easily connect with people and build strong relationships with colleagues and collaborators.
+    </p>
+    <p>
+        I am a lifelong learner who is always eager to embrace new challenges and opportunities. My curiosity and determination drive
+        me to stay at the forefront of technological advancements and continuously enhance my skills.
+    </p>
+    <p>
+        One of my core strengths is my ability to translate complex data into actionable insights. I excel at communicating technical
+        concepts to non-technical stakeholders, ensuring that data-driven strategies are effectively understood and implemented.
+        My strong analytical skills, combined with my ability to think critically and creatively, allow me to identify different
+        patterns and trends that can be easily overlooked.
+    </p>
+    <p>
+        Beyond my technical skills, I am a proactive and detail-oriented individual who is committed to excellence.
+        I am known for my strong work ethic, reliability, and positive attitude.
+    </p>
+    <p>
+        When I'm not immersed in data science projects, I enjoy exploring new technologies and reading about advancements in AI.
+        I am also an avid traveler and believe that experiencing different cultures enriches my perspective and creativity.
+    </p>
+    <p>
+        Feel free to explore my <a href="{{ url_for('projects') }}">projects</a> to see some of the work I have done.
+        I am always open to new opportunities and collaborations, so don't hesitate to <a href="{{ url_for('contacts') }}">get in touch</a>.
+    </p>
+</div>
+{% endblock %}

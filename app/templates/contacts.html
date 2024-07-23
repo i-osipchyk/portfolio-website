@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block content %}
+<div class="contacts">
+    <h2>Contacts</h2>
+    <ul class="social-links">
+        <li><a href="https://www.linkedin.com/in/ivan-osipchyk/" target="_blank"><img src="{{ url_for('static', filename='images/icons/linkedin.png') }}" alt="LinkedIn"> LinkedIn</a></li>
+        <li><a href="https://github.com/i-osipchyk" target="_blank"><img src="{{ url_for('static', filename='images/icons/github.png') }}" alt="GitHub"> GitHub</a></li>
+        <li><a href="https://t.me/i_vantus" target="_blank"><img src="{{ url_for('static', filename='images/icons/telegram.png') }}" alt="Telegram"> Telegram</a></li>
+        <li><a href="https://www.instagram.com/i_osipchyk?igsh=b3YzZWN5bnQyMDVx&utm_source=qr" target="_blank"><img src="{{ url_for('static', filename='images/icons/instagram.png') }}" alt="Instagram"> Instagram</a></li>
+    </ul>
+</div>
+{% endblock %}
