@@ -1,16 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Website Project</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Personal Website Project</h1>
-        <p>Detailed information about Project 1 goes here.</p>
-        <a href="{{ url_for('index') }}">Back to Home</a>
+{% extends "base.html" %}
+
+{% block title %}Portfolio Website{% endblock %}
+
+{% block content %}
+<div class="project">
+    <h1>Portfolio Website</h1>
+    <a href="https://github.com/i-osipchyk/portfolio-website.git" target="_blank" class="btn">View on GitHub</a>
+    <div class="description">
+        <h2>Description</h2>
+        <p>Hosting my personal website is a project itself. It's a great way to apply knowledge from cloud computing courses to a real project.</p>
+        <p>
+            Here are the skills I've gained while developing my personal website:
+        </p>
+        <ul>
+            <li>Cloud Development</li>
+            <li>Containerized Applications</li>
+            <li>CI/CD Pipelines</li>
+            <li>Web Development</li>
+        </ul>
+        <p>
+            And here are the technologies I've used in this project:
+        </p>
+        <ul>
+            <li>AWS Elastic Container Registry</li>
+            <li>AWS Elastic Container Service</li>
+            <li>GitHub Actions</li>
+            <li>Docker</li>
+            <li>Flask</li>
+            <li>Other AWS Services</li>
+            <li>HTML/CSS</li>
+        </ul>
     </div>
-</body>
-</html>
+    <div class="screenshots">
+        <h2>Screenshots</h2>
+        <h3>ECR Repository</h3>
+        <div class="screenshot">
+            <img src="{{ url_for('static', filename='images/projects/ecr-portfolio-website.png') }}" alt="ECR Repository">
+        </div>
+        <h3>ECR Cluster</h3>
+        <div class="screenshot">
+            <img src="{{ url_for('static', filename='images/projects/ecs-portfolio-website.png') }}" alt="ECS Cluster">
+        </div>
+    </div>
+</div>
+{% endblock %}
