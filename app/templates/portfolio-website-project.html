@@ -7,8 +7,15 @@
     <h1>Portfolio Website</h1>
     <a href="https://github.com/i-osipchyk/portfolio-website.git" target="_blank" class="btn">View on GitHub</a>
     <div class="description">
-        <h2>Description</h2>
-        <p>Hosting my personal website is a project itself. It's a great way to apply knowledge from cloud computing courses to a real project.</p>
+        <h2>Introduction</h2>
+        <p>
+            Before building this website I have recently finished a course about containerized applications in the cloud.
+            Building a project or your own is always a good idea how to reinforce what was studied during the course.
+            So I've decided not to only deploy my own container for the sake of practice, but also make it somehow useful.
+            And making a portfolio website came to me as a brilliant idea. It may be more useful for those like UI designers,
+            but their portfolio is more about how it looks like. On the contrast, mine is how it was built. So let's move there.
+        </p>
+        <h2>Skills and Technologies</h2>
         <p>
             Here are the skills I've gained while developing my personal website:
         </p>
@@ -30,6 +37,17 @@
             <li>Other AWS Services</li>
             <li>HTML/CSS</li>
         </ul>
+        <h2>Description</h2>
+        <p>
+            To deploy this website I first created it locally, with only one endpoint and an index page with one line of text.
+            I decided to use Flask, because it is widely used to deploy ML models.<br>
+            After that I've built Docker image, created container and tested it locally.<br>
+            Next step was to set up cloud environment. I've chosen AWS because I find it the simplest platform to learn on.
+            I've created ECR Repository, ECS Cluster and Task Definition to run on ECS Cluster.<br>
+            Then I've pushed my image to ECR and created Task on ECS to run this image. I also used Route 53 to set up a custom domain name for the website.<br>
+            Next part of the project was to set up CI/CD pipeline. I've used GitHub Actions for that.<br>
+            Lastly, I added content to the website, added multiple pages with style and information, and now continue adding projects there.
+        </p>
     </div>
     <div class="screenshots">
         <h2>Screenshots</h2>

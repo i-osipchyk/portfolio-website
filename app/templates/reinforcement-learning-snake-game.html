@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio Website{% endblock %}
+
+{% block content %}
+<div class="project">
+    <h1>Snake Game with Reinforcement Learning</h1>
+    <a href="https://github.com/i-osipchyk/portfolio-website.git" target="_blank" class="btn">View on GitHub</a>
+    <div class="description">
+        <h2>Introduction</h2>
+        <p>
+            When I started learning LLMs, I first faced the concept of Reinforcement Learning in practice. That is why I've
+            decided to familiarize myself with how it works in practice. The best way to do it is to implement some simple
+            agent by myself. That is why I've decided to do this project. Later I want to continue my journey in RL with multi-agent
+            environment, for example tic-tac-toe game.
+        </p>
+        <h2>Skills and Technologies</h2>
+        <p>
+            Here are the skills I've gained while developing this game:
+        </p>
+        <ul>
+            <li>Reinforcement Learning</li>
+            <li>OOP</li>
+        </ul>
+        <p>
+            And here are the technologies I've used in this project:
+        </p>
+        <ul>
+            <li>Python</li>
+            <li>PyTorch</li>
+            <li>PyGame</li>
+        </ul>
+        <h2>Description</h2>
+        <p>
+            During the game, the agent discovers correct moves through the reward. If the snake eats an apple, it gets 10.
+            If it touches itself or the wall, it gets -10. In all other cases it gets 0. Snake knows if there is a wall on the right,
+            on the left or right after its head. It also knows about the position of the apple relative to its head. For some time
+            in the beginning of the training, there is some randomness implemented. Here are the results after 2.5 hours training:
+        </p>
+        <div class="screenshots">
+            <h3>Training Plot</h3>
+            <div class="screenshot">
+                <img src="{{ url_for('static', filename='images/projects/snake-plot.png') }}" alt="Plot of Training Games">
+            </div>
+            <p>
+                Interestingly, there was a rapid growth in the results from 160th to 200th game. After that, Snake has barely known
+                something new. Here are a few interesting things I've noticed, while watching how AI plays the game:
+            </p>
+            <ol>
+                <li>
+                    <p>
+                        It learned to save the space. Very often, when Snake was long enough, it was saving space on the map by leading its
+                        head right after its tail. Here is the example:
+                    </p>
+                    <div class="screenshot">
+                        <img src="{{ url_for('static', filename='images/projects/snake-space.png') }}" alt="Snake Saving Space">
+                    </div>
+                </li>
+                <li>
+                    <p>
+                        Its strategy is not perfect, so often it makes a circle out of itself. However, it learned how to escape these circles.
+                        It tries to fill the space within it and then escape when the end of the tales will open a way out. However, in this example
+                        it didn't make it:)
+                    </p>
+                    <div class="screenshot">
+                        <img src="{{ url_for('static', filename='images/projects/snake-circle.png') }}" alt="Snake Making Circle">
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+{% endblock %}
